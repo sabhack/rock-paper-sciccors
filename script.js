@@ -19,12 +19,16 @@ function playRound(playerSelection, computerSelection) {
     ) {
         return `Computer Lose! ${playerSelection} beats ${computerSelection}`; 
     }
+    
+    // This case the Computer wins
     else if ( (computerSelection === 'rock' && playerSelection === 'scissors') ||
               (computerSelection === 'paper' && playerSelection === 'rock') ||
               (computerSelection === 'scissors' && playerSelection === 'paper')
     ) {
         return `Player Lose! ${computerSelection} beats ${playerSelection}`;
     }
+
+    // A Tie: The selections are the same (Draw)
     else {
         return `The Game is Tie Player selected ${playerSelection} and Computer selected ${computerSelection}`;
     }
