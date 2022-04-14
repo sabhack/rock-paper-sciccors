@@ -61,9 +61,31 @@ function game(){
         //keeping store of the selected value for computer
         let computerSelection = computerPlay();
 
-        //keeping store of the result of each round
+        //keeping store of the result of each round played
+        let roundResult = playRound(playerSelection, computerSelection);
+        console.log(`Round ${i}:` + '\n' + `Your choice: ${playerSelection}` + '\n' + `Computer choice: ${computerSelection}`);
+
+        //declare who won the round and do an increment to the winner
+        if (roundResult === `Computer Lose! ${playerSelection} beats ${computerSelection}`) {
+            console.log('Player won this round')
+        } else if (roundResult === `Player Lose! ${computerSelection} beats ${playerSelection}`) {
+            console.log('Computer won this round');
+        } else {
+            console.log(`The Game is Tie Player selected ${playerSelection} and Computer selected ${computerSelection}`)
+        }
     }
+
+    // Final winner of all the rounds
+    if (playerScore > computerScore) {
+        winner = 'Player';
+    } else if (playerScore < computerScore) {
+        winner = 'Computer';
+    } else {
+        winner = 'Nobody';
+    }
+    return `${winner} is the winner`;
 }
 
-const computerSelection = computerPlay();
-console.log(playRound(playerSelection, computerSelection));
+// calling the game function
+
+console.log(game());
