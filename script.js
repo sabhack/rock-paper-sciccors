@@ -1,8 +1,9 @@
 let playerScore = 0;
 let computerScore = 0;
+const buttons = document.querySelectorAll('input');
 
 // Computer options
-const options = ['rock', 'paper', 'scissors'];
+let options = ['rock', 'paper', 'scissors'];
 
 // Computer selection of random value from the 3 options
 function computerPlay(randomChoice) {
@@ -10,11 +11,19 @@ function computerPlay(randomChoice) {
     return randomChoice;
 }
 
+// Disabling the button on first run
+function disableButtons() {
+    buttons.forEach(elem => {
+        elem.disabled = true
+    })
+}
+
 // Outputting Computer selection
 console.log(computerPlay(options));
 
 // Get text input of the player
-function getInput() {
+/**
+ * function getInput() {
     let playerSelection = prompt('Select either 1 from 3: rock, paper, or scissors? by typing it');
     playerSelection = playerSelection.toLocaleLowerCase();
 
@@ -24,9 +33,12 @@ function getInput() {
     }
     return playerSelection;
 }
+ */
 
 // Function that Plays a Single Round of Rock Paper Scissors.
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
+    let computerSelection = computerPlay()
+
     // This case the Player wins
     if (    (playerSelection === 'rock' && computerSelection === 'scissors') ||
             (playerSelection === 'paper' && computerSelection === 'rock') || 
@@ -55,12 +67,6 @@ function playRound(playerSelection, computerSelection) {
 function game(){
     
     for(let i = 0; i < 5; i++) {
-        //keeping store of the selected value for player
-        let playerSelection = getInput();
-
-        //keeping store of the selected value for computer
-        let computerSelection = computerPlay();
-
         //keeping store of the result of each round played
         let roundResult = playRound(playerSelection, computerSelection);
         console.log(`Round ${i}:` + '\n' + `Your choice: ${playerSelection}` + '\n' + `Computer choice: ${computerSelection}`);
@@ -89,3 +95,9 @@ function game(){
 // calling the game function
 
 console.log(game());
+
+buttons.forEach(button =>{
+    button.addEventListener('click', function(){
+        playRound(button.value)
+    })
+})
