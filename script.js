@@ -38,6 +38,7 @@ console.log(computerPlay(options));
 // Function that Plays a Single Round of Rock Paper Scissors.
 function playRound(playerSelection) {
     let computerSelection = computerPlay()
+    let result = ""
 
     // This case the Player wins
     if (    (playerSelection === 'rock' && computerSelection === 'scissors') ||
@@ -45,7 +46,7 @@ function playRound(playerSelection) {
             (playerSelection === 'scissors' && computerSelection === 'paper')
     ) {
         playerScore++;
-        console.log(`Computer Lose! ${playerSelection} beats ${computerSelection}`); 
+        result = `Computer Lose! ${playerSelection} beats ${computerSelection}`; 
     }
     
     // This case the Computer wins
@@ -54,13 +55,17 @@ function playRound(playerSelection) {
               (computerSelection === 'scissors' && playerSelection === 'paper')
     ) {
         computerScore++;
-        console.log(`Player Lose! ${computerSelection} beats ${playerSelection}`);
+        result = `Player Lose! ${computerSelection} beats ${playerSelection}`;
     }
 
     // A Tie: The selections are the same (Draw)
     else {
-        console.log(`The Game is Tie Player selected ${playerSelection} and Computer selected ${computerSelection}`);
+        result = `The Game is Tie Player selected ${playerSelection} and Computer selected ${computerSelection}`;
     }
+
+    document.getElementById('result').innerHTML = result
+    return
+
 }
 
 // Creating a function to play 5 rounds of the game
@@ -94,7 +99,7 @@ function game(){
 
 // calling the game function
 
-console.log(game());
+//console.log(game());
 
 buttons.forEach(button =>{
     button.addEventListener('click', function(){
