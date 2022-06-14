@@ -46,67 +46,38 @@ function playRound(playerSelection) {
             (playerSelection === 'scissors' && computerSelection === 'paper')
     ) {
         playerScore+= 1;
-        result = `Computer Lose! ${playerSelection} beats ${computerSelection}
-        "<br><br>Player score: " + ${playerScore} + "<br>Computer score: " + ${computerScore}`; 
+        result = (`Computer Lose! ${playerSelection} beats ${computerSelection} 
+        <br><br>Player score: ${playerScore} <br>Computer score: ${computerScore}`); 
 
         if (playerScore === 5) {
             result += "<br><br>You won the game! Reload the page to play again"
+            disableButtons()
         }
     }
-    
-    
-    
-    // This case the Computer wins
-    else if ( (computerSelection === 'rock' && playerSelection === 'scissors') ||
-              (computerSelection === 'paper' && playerSelection === 'rock') ||
-              (computerSelection === 'scissors' && playerSelection === 'paper')
-    ) {
-        computerScore++;
-        result = `Player Lose! ${computerSelection} beats ${playerSelection}`;
+
+// This case the Computer wins
+    else if (playerSelection == computerSelection) {
+
+        result = (`The Game is Tie Player selected ${playerSelection} and Computer selected ${computerSelection}
+        <br><br>Player score: ${playerScore} <br>Computer score:  ${computerScore}`);
     }
 
     // A Tie: The selections are the same (Draw)
     else {
-        result = `The Game is Tie Player selected ${playerSelection} and Computer selected ${computerSelection}`;
+        computerScore += 1
+        result = (`Player Lose! ${computerSelection} beats ${playerSelection} 
+        <br><br>Player score: ${playerScore} <br>Computer score: ${computerScore}`);
+
+        if (computerScore === 5) {
+            result += "<br><br>You won the game! Reload the page to play again"
+            disableButtons()
+        }
     }
 
     document.getElementById('result').innerHTML = result
     return
 
 }
-
-// Creating a function to play 5 rounds of the game
-function game(){
-    
-    for(let i = 0; i < 5; i++) {
-        //keeping store of the result of each round played
-        let roundResult = playRound(playerSelection, computerSelection);
-        console.log(`Round ${i}:` + '\n' + `Your choice: ${playerSelection}` + '\n' + `Computer choice: ${computerSelection}`);
-
-        //declare who won the round and do an increment to the winner
-        if (roundResult === `Computer Lose! ${playerSelection} beats ${computerSelection}`) {
-            console.log('Player won this round')
-        } else if (roundResult === `Player Lose! ${computerSelection} beats ${playerSelection}`) {
-            console.log('Computer won this round');
-        } else {
-            console.log(`The Game is Tie Player selected ${playerSelection} and Computer selected ${computerSelection}`)
-        }
-    }
-
-    // Final winner of all the rounds
-    if (playerScore > computerScore) {
-        winner = 'Player';
-    } else if (playerScore < computerScore) {
-        winner = 'Computer';
-    } else {
-        winner = 'Nobody';
-    }
-    return `${winner} is the winner`;
-}
-
-// calling the game function
-
-//console.log(game());
 
 buttons.forEach(button =>{
     button.addEventListener('click', function(){
