@@ -45,9 +45,16 @@ function playRound(playerSelection) {
             (playerSelection === 'paper' && computerSelection === 'rock') || 
             (playerSelection === 'scissors' && computerSelection === 'paper')
     ) {
-        playerScore++;
-        result = `Computer Lose! ${playerSelection} beats ${computerSelection}`; 
+        playerScore+= 1;
+        result = `Computer Lose! ${playerSelection} beats ${computerSelection}
+        "<br><br>Player score: " + ${playerScore} + "<br>Computer score: " + ${computerScore}`; 
+
+        if (playerScore === 5) {
+            result += "<br><br>You won the game! Reload the page to play again"
+        }
     }
+    
+    
     
     // This case the Computer wins
     else if ( (computerSelection === 'rock' && playerSelection === 'scissors') ||
